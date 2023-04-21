@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Name</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <form th:method="POST" th:action="@{/app/age}">
+        <input name="name" type="text" placeholder="Введите имя">
+        <button type="submit">Узнать возраст</button>
+    </form>
+    <br>
+    <form th:method="POST" th:action="@{/app/frequency}">
+        <input name="name" type="text" placeholder="Введите имя">
+        <button type="submit">Частота просмотра имени</button>
+    </form>
+    <br>
+    <form th:method="GET" th:action="@{/app/oldest}">
+        <button type="submit">Узнать старейшего</button>
+    </form>
+
+</body>
+</html>

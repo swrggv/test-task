@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Возраст</title>
+</head>
+<h4>Возраст:</h4>
+<p th:text="${person.getAge()}">VALUE</p>
+<p th:text="${name}">VALUE</p>
+<body>
+        <form th:metod ="GET" th:action="@{/app}">
+        <input type="submit" value="Главная">
+    </form>
+</body>
+</html>
