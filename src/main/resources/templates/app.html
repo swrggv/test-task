@@ -5,7 +5,11 @@
     <title>Name</title>
 </head>
 <body>
-    <h1>Welcome!</h1>
+    <h1>Добро пожаловать!</h1>
+    <form th:method="POST" th:action="@{/app}">
+        <button type="submit">Добавить пользователей из файла</button>
+    </form>
+    <br>
     <form th:method="POST" th:action="@{/app/age}">
         <input name="name" type="text" placeholder="Введите имя">
         <button type="submit">Узнать возраст</button>

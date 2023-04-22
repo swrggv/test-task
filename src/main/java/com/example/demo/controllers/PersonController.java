@@ -22,7 +22,7 @@ public class PersonController {
     }
 
     @PostMapping("age")
-    public String getAge(@RequestParam String name, Model model) {
+    public String getAge(@RequestParam String name, Model model) throws IllegalAccessException {
         Person person = personService.findPersonAge(name);
         model.addAttribute("person", person);
         model.addAttribute("name", name);
@@ -37,5 +37,16 @@ public class PersonController {
     @GetMapping("oldest")
     public String getOldest() {
         return "oldest";
+    }
+
+    @PostMapping
+    public String addPeopleFromFile() {
+        personService.addPeopleFromFile();
+        return "redirect:app";
+    }
+
+    @RequestMapping(value="/error")
+    public String error() {
+        return "error";
     }
 }
