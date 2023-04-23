@@ -5,6 +5,7 @@ import com.example.demo.reposotories.PersonRepository;
 import com.ibm.icu.text.Transliterator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.BufferedReader;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class PersonServiceImpl implements PersonService {
     private final PersonRepository personRepository;
     private final WebClient webClient;
@@ -25,7 +27,8 @@ public class PersonServiceImpl implements PersonService {
     private static final String CYRILLIC_TO_LATIN = "Russian-Latin/BGN";
 
     @Override
-    public Person findPersonAge(String name) throws IllegalAccessException {
+    @Transactional
+    public Person findPersonAge(String name) {
         if (!isCorrectName(name)) {
             throw new IllegalArgumentException("Допустимы только символы кириллицы");
         }
@@ -36,6 +39,7 @@ public class PersonServiceImpl implements PersonService {
             personRepository.save(person);
             return person;
         }
+        personRepository.increaseViews(name);
         return personRepository.findByName(name);
     }
 
@@ -57,6 +61,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    @Transactional
     public void addPeopleFromFile() {
         List<Person> peopleToSave = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : readFile().entrySet()) {
@@ -64,6 +69,16 @@ public class PersonServiceImpl implements PersonService {
             peopleToSave.add(person);
         }
         personRepository.saveAll(peopleToSave);
+    }
+
+    @Override
+    public Person getOldestName() {
+        return personRepository.findOldestPerson();
+    }
+
+    @Override
+    public Person getStatistic(String name) {
+        return personRepository.findByName(name);
     }
 
     private Map<String, Integer> readFile() {

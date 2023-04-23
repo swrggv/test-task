@@ -5,7 +5,9 @@
     <title>Frequency</title>
 </head>
 <body>
-  <h1>frequency</h1>
+  <h1>Сколько раз просматривали</h1>
+  <p th:text="${person.getName()}">VALUE</p>
+  <p th:text="${person.getViews()}">VALUE</p>
   <form th:metod ="GET" th:action="@{/app}">
       <input type="submit" value="Главная"> </form>
 </body>

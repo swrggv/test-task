@@ -30,12 +30,16 @@ public class PersonController {
     }
 
     @PostMapping("frequency")
-    public String getFrequency() {
+    public String getFrequency(@RequestParam String name, Model model) throws IllegalAccessException {
+        Person person = personService.getStatistic(name);
+        model.addAttribute("person", person);
         return "frequency";
     }
 
     @GetMapping("oldest")
-    public String getOldest() {
+    public String getOldest(Model model) {
+        Person person = personService.getOldestName();
+        model.addAttribute("person", person);
         return "oldest";
     }
 

@@ -24,8 +24,12 @@ public class Person {
     @Column(name = "age")
     private int age;
 
+    @Column(name = "views")
+    private int views;
+
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
+        this.views = 0;
     }
 }

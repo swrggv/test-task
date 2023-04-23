@@ -5,7 +5,9 @@
     <title>Старейший</title>
 </head>
 <body>
-  <h1>Старейший</h1>
+  <h4>Самый большой возраст</h4>
+  <p th:text="${person.getAge()}">VALUE</p>
+  <p th:text="${person.getName()}">VALUE</p>
     <form th:metod ="GET" th:action="@{/app}">
         <input type="submit" value="Главная"> </form>
 </body>
