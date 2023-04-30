@@ -1,9 +1,6 @@
 package com.example.demo.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -14,10 +11,13 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @EqualsAndHashCode.Exclude
     private long id;
     @Column(name = "name")
     private String name;
@@ -25,11 +25,10 @@ public class Person {
     private int age;
 
     @Column(name = "views")
-    private int views;
+    private int views = 1;
 
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
-        this.views = 0;
     }
 }

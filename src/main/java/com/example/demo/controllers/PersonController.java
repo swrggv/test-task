@@ -49,7 +49,7 @@ public class PersonController {
         return "redirect:app";
     }
 
-    @RequestMapping(value="/error")
+    @RequestMapping(value = "/error")
     public String error() {
         return "error";
     }

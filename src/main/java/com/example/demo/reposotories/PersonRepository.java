@@ -13,7 +13,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     boolean existsByName(String name);
 
-    @Query(value = "select * from PERSONS group by ID having max(AGE) limit 1", nativeQuery = true)
+    @Query(value = "select * from PERSONS order by AGE  desc limit 1", nativeQuery = true)
     Person findOldestPerson();
 
     @Modifying
